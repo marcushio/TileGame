@@ -13,14 +13,16 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class Display{
-    public static final int tileHeight = 100, tileWidth = 100;
+    public static final int tileHeight = 76, tileWidth = 76;
     public Display(Stage primaryStage, int rows, int columns){
         FlowPane root = new FlowPane();
-        TilePane grid = new TilePane(); //fillGrid(rows, columns);
+        TilePane grid = new TilePane();
+        grid.setPrefColumns(columns);
+        grid.setPrefRows(rows);
         grid.setHgap(2);
         grid.setVgap(2);
         int tiles = rows*columns;
-        for(int i = 0; i <= tiles; i++){
+        for(int i = 0; i < tiles; i++){
             Canvas tempCanvas = new Canvas(tileWidth, tileHeight);
             GraphicsContext gc = tempCanvas.getGraphicsContext2D();
             gc. setFill ( Color . BLUE );
