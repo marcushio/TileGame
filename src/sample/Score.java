@@ -1,13 +1,13 @@
+package sample;
+
 public class Score {
     private int longestStreak;
     private int currentStreak;
 
-    private void updateStreak(){
+    public void updateStreak(){
         currentStreak++;
-        if (currentStreak == longestStreak || currentStreak > longestStreak){
+        if (currentStreak >= longestStreak){
             longestStreak = currentStreak;
         }
     }
-
-
 }
