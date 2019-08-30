@@ -19,13 +19,22 @@ public class Main extends Application {
         launch(args);
     }
 
-    public void updateBoard(int index, int oldIndex){
-
-    }
-
     @Override
     public void start(Stage primaryStage) throws Exception{
         display = new Display(primaryStage, ROWS, COLUMNS );
+    }
+
+    public void compareTiles(int index, int oldIndex){
+        Tile selection1 = board.getTile(index);
+        Tile selection2 = board.getTile(oldIndex);
+        for(Element element1: selection1.elements){
+            for(Element element2: selection2.elements){
+                if(element1 == element2){
+                    board.removeTileElement(index, element1);
+                    board.removeTileElement(oldIndex, element2);
+                }
+            }
+        }
     }
 
 }

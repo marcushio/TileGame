@@ -19,6 +19,6 @@ public class InputState {
     }
 
     public void notifyObserver(){
-        observer.updateBoard(index, oldIndex);
+        observer.compareTiles(index, oldIndex);
     }
 }

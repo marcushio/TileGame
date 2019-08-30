@@ -20,16 +20,19 @@ public class Board {
         }
     }
 
+    public Tile getTile(int index){
+        return tiles.get(index);
+    }
+
+    public void removeTileElement(int index, Element element){
+        tiles.get(index).removeElement(element);
+    }
+
+
+
     public int getColumns() { return columns; }
 
     public int getRows() { return rows; }
 
-    /**
-     * Invoked when all elements of a tile have been matched and that tile can be removed from the board.
-     * I get the feeling we won't need this. Because we're just going to be removing patterns
-     */
-    public void removeTile(){
-
-    }
 
 }
