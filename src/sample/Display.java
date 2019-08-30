@@ -15,14 +15,17 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import jdk.internal.util.xml.impl.Input;
 
+import java.util.ArrayList;
+
 public class Display{
     public static final int tileHeight = 76, tileWidth = 76;
     private InputState inputState = new InputState();
-    public Display(Stage primaryStage, int rows, int columns){
+
+    public Display(Stage primaryStage, int rows, int columns, Board board){
         int tiles = rows*columns;
         FlowPane root = new FlowPane();
-        TilePane grid = fillGrid(rows, columns);//new TilePane();
-        
+        TilePane grid = fillGrid(rows, columns, board);//new TilePane();
+
         VBox scoreBoard = new VBox();
         Text longestStreak = new Text("Longest Streak: 0");
         scoreBoard.getChildren().add(longestStreak);
@@ -38,7 +41,7 @@ public class Display{
         primaryStage.show();
     }
 
-    private TilePane fillGrid(int rows, int columns){
+    private TilePane fillGrid(int rows, int columns, Board board){
         TilePane grid = new TilePane();
         grid.setPrefColumns(columns);
         grid.setPrefRows(rows);
@@ -47,7 +50,8 @@ public class Display{
         int tiles = rows*columns;
 
         for(int i = 0; i < tiles; i++){
-            DisplayTile tempCanvas = new DisplayTile(tileWidth, tileHeight);
+            DisplayTile tempCanvas = paintTile(board.getTile(i).elements);
+
             tempCanvas.setIndex(i);
             tempCanvas.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
                 @Override
@@ -60,13 +64,36 @@ public class Display{
                     inputState.updateState(selected.getIndex());
                 }
             });
-            GraphicsContext gc = tempCanvas.getGraphicsContext2D();
-            gc.setFill(Color.BLUE);
-            gc.fillRect(0, 0, tempCanvas.getWidth(), tempCanvas.getHeight());
-            gc.setFill(Color.RED);
-            gc.fillRect(20,20,40,40);
             grid.getChildren().add(tempCanvas);
         }
         return grid;
+    }
+
+    private DisplayTile paintTile(ArrayList<Element> elements ){
+        DisplayTile newTile = new DisplayTile(tileWidth, tileHeight);
+        GraphicsContext gc = newTile.getGraphicsContext2D();
+        gc.setFill(Color.BLUE);
+        gc.fillRect(0,0,tileWidth,tileHeight);
+        for(Element element: elements){
+            if(element == Element.SQUARE){
+                gc.setFill(Color.RED);
+                gc.fillRect(20,20,50,50);
+            } else if (element == Element.CIRCLE){
+                gc.setFill(Color.BURLYWOOD);
+                gc.fillOval(20,20,40,40);
+            } else if (element == Element.HLINE){
+                gc.setStroke(Color.GREEN);
+                gc.strokeLine(5,38,71,38);
+            } else if (element == Element.VLINE){
+                gc.setStroke((Color.RED));
+                gc.strokeLine(38,5,38,71);
+            } else if (element == Element.XCORNER){
+                gc.setStroke(Color.CYAN);
+                gc.strokeLine(2, 5, 12, 15);
+                gc.strokeLine(12, 5, 2, 15);
+            }
+        }
+
+        return newTile;
     }
 }

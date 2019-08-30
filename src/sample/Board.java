@@ -16,7 +16,12 @@ public class Board {
         //fill the board with tiles
         for(int i = 0; i < numTiles; i++){
                 /** I'll have to generate the elements randomly later **/
-                tiles.add(new Tile());
+                ArrayList<Element> elements = new ArrayList<Element>();
+                elements.add(Element.CIRCLE);
+                elements.add(Element.HLINE);
+                elements.add(Element.VLINE);
+                elements.add(Element.XCORNER);
+                tiles.add(new Tile(elements));
         }
     }
 
@@ -28,11 +33,7 @@ public class Board {
         tiles.get(index).removeElement(element);
     }
 
-
-
-    public int getColumns() { return columns; }
-
-    public int getRows() { return rows; }
+    public ArrayList<Tile> getTiles(){ return tiles; }
 
 
 }

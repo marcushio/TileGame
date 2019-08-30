@@ -21,7 +21,8 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        display = new Display(primaryStage, ROWS, COLUMNS );
+        board = new Board(ROWS, COLUMNS);
+        display = new Display(primaryStage, ROWS, COLUMNS, board );
     }
 
     public void compareTiles(int index, int oldIndex){
