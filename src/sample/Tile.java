@@ -1,16 +1,22 @@
 package sample;
 import java.util.ArrayList;
 enum Element{
-    SQUARE, CIRCLE, TRIANGLE;
+    SQUARE, CIRCLE, TRIANGLE, HLINE, VLINE;
 }
 
 public class Tile {
     /**** you can change the number of elements of on each tile here *****/
-    int numElements = 3;
+    public static final int numElements = 3;
     ArrayList<Element> elements;
 
     public Tile(ArrayList<Element> newElements){
         elements = new ArrayList<Element>(newElements);
+    }
+    public Tile(){
+        /**later I'll make random element ***/
+        elements.add(Element.HLINE);
+        elements.add(Element.VLINE);
+        elements.add(Element.CIRCLE);
     }
 
     /**

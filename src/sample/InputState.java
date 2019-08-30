@@ -1,31 +1,24 @@
 package sample;
 
 public class InputState {
-    int rowClicked;
-    int colClicked;
-    int oldRowClicked;
-    int oldColClicked;
+    int index;
+    int oldIndex;
+    Main observer;
 
-    public void newClick(int row, int col){
-        oldRowClicked = this.rowClicked;
-        oldColClicked = this.colClicked;
-        this.rowClicked = row;
-        this.colClicked = col;
+    public void updateState(int index){
+        oldIndex = index;
+        this.index = index;
     }
 
-    public int getRowClicked() {
-        return rowClicked;
+    public int getIndex() {
+        return index;
     }
 
-    public int getColClicked() {
-        return colClicked;
+    public int getOldIndex() {
+        return oldIndex;
     }
 
-    public int getOldRowClicked() {
-        return oldRowClicked;
-    }
-
-    public int getOldColClicked() {
-        return oldColClicked;
+    public void notifyObserver(){
+        observer.updateBoard(index, oldIndex);
     }
 }

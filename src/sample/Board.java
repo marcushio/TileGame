@@ -2,25 +2,21 @@ package sample;
 import java.util.ArrayList;
 
 public class Board {
-    /*** rows and columns can be changed to fit size requirements just be sure there is an even number of tiles ***/
-    int rows = 6, columns = 6;
     private Tile selection1;
     private Tile selection2;
-    private Tile tiles[][];
+    private ArrayList<Tile> tiles;
+    private int rows, columns;
 
-    public Board(){
-        tiles = new Tile[rows][columns];
+    public Board(int rows, int columns){
+        this.rows = rows;
+        this.columns = columns;
+        int numTiles = rows*columns;
+        tiles = new ArrayList<Tile>();
+
         //fill the board with tiles
-        for(int row = 0; row < rows; row++){
-            for(int col = 0; col < columns; col++){
-                //create list of elements that will be contained in the new tile
-                ArrayList<Element> elements = new ArrayList<Element>();
+        for(int i = 0; i < numTiles; i++){
                 /** I'll have to generate the elements randomly later **/
-                elements.add(Element.CIRCLE);
-                elements.add(Element.SQUARE);
-                elements.add(Element.TRIANGLE);
-                tiles[rows][columns] = new Tile(elements);
-            }
+                tiles.add(new Tile());
         }
     }
 
@@ -30,6 +26,7 @@ public class Board {
 
     /**
      * Invoked when all elements of a tile have been matched and that tile can be removed from the board.
+     * I get the feeling we won't need this. Because we're just going to be removing patterns
      */
     public void removeTile(){
 
