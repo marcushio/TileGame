@@ -8,6 +8,16 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 
+/**
+ *  @author Marcus Trujillo
+ *  @version 8/30/19
+ *  CS351
+ *
+ *  Main class that uses launch. It contains most of the program logic, does the initial setup of the
+ *  objects used.
+ *  Main observes the inputState.
+ *
+ */
 import java.util.ArrayList;
 
 public class Display{
@@ -55,7 +65,7 @@ public class Display{
     }
 
     private DisplayTile paintTile(Tile tile){
-        ArrayList<Element> elements = tile.elements;
+        ArrayList<Element> elements = tile.getElements();
         DisplayTile newTile = new DisplayTile(tileWidth, tileHeight);
         GraphicsContext gc = newTile.getGraphicsContext2D();
         gc.setFill(Color.BLUE);
@@ -80,7 +90,7 @@ public class Display{
                 gc.strokeLine(12, 5, 2, 15);
             }
         }
-        if(tile.getIndex() == inputState.index){
+        if(tile.getIndex() == inputState.getIndex()){
             gc.setFill(Color.WHITE);
             gc.setLineWidth(10);
             gc.strokeRect(0,0, tileHeight, tileWidth);
