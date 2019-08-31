@@ -53,21 +53,13 @@ public class Display{
         int tiles = rows*columns;
 
         for(int i = 0; i < tiles; i++){
-            DisplayTile tempCanvas = paintTile(board.getTile(i).elements);
+            DisplayTile tempCanvas = paintTile(board.getTile(i));
             tempCanvas.setIndex(i);
             tempCanvas.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent event) {
                     DisplayTile selected = (DisplayTile) event.getSource();
-                    inputState.updateState(selected.getIndex()); //this is a little sneaky this kind of sets off a cascade
-                    GraphicsContext gc = selected.getGraphicsContext2D();
-                    gc.setFill(Color.WHITE);
-                    gc.setLineWidth(10);
-                    gc.strokeRect(0,0, tileHeight, tileWidth);
-                    //ArrayList<Tile> tiles = board.getTiles();
-                    //for(Tile tile: tiles){
-                    //    paintTile(tile.elements);
-                    //}
+                    inputState.updateState(selected.getIndex()); //this sets off a cascade of method calls...
                 }
             });
             grid.getChildren().add(tempCanvas);
@@ -75,11 +67,13 @@ public class Display{
         return grid;
     }
 
-    private DisplayTile paintTile(ArrayList<Element> elements ){
+    private DisplayTile paintTile(Tile tile){
+        ArrayList<Element> elements = tile.elements;
         DisplayTile newTile = new DisplayTile(tileWidth, tileHeight);
         GraphicsContext gc = newTile.getGraphicsContext2D();
         gc.setFill(Color.BLUE);
         gc.fillRect(0,0,tileWidth,tileHeight);
+        //paint elements of Tile onto DisplayTile that represents this Tile
         for(Element element: elements){
             if(element == Element.SQUARE){
                 gc.setFill(Color.RED);
@@ -98,6 +92,11 @@ public class Display{
                 gc.strokeLine(2, 5, 12, 15);
                 gc.strokeLine(12, 5, 2, 15);
             }
+        }
+        if(tile.getIndex() == inputState.index){
+            gc.setFill(Color.WHITE);
+            gc.setLineWidth(10);
+            gc.strokeRect(0,0, tileHeight, tileWidth);
         }
 
         return newTile;

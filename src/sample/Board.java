@@ -18,7 +18,7 @@ public class Board {
         int numTiles = rows*columns;
         for(int i = 0; i < numTiles; i++){
             /** I'll have to generate the elements randomly later **/
-            tiles.add(new Tile());
+            tiles.add(new Tile(i));
         }
     }
 

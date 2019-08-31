@@ -9,8 +9,10 @@ public class Tile {
     /**** you can change the number of elements of on each tile here *****/
     public static final int numElements = 4;
     public ArrayList<Element> elements;
+    int index;
 
-    public Tile(){
+    public Tile(int index){
+        this.index = index;
         elements = new ArrayList<Element>();
         elements.add(Element.CIRCLE);
         elements.add(Element.HLINE);
@@ -20,6 +22,8 @@ public class Tile {
     public Tile(ArrayList<Element> newElements){
         elements = new ArrayList<Element>(newElements);
     }
+
+    public int getIndex(){return index;}
 
     /**
      * Invoked when you need to remove elements that were just matched.
