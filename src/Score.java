@@ -1,5 +1,3 @@
-package sample;
-
 public class Score {
     private int longestStreak = 0;
     private int currentStreak = 0;

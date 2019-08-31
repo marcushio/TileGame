@@ -1,10 +1,4 @@
-package sample;
-
 import javafx.application.Application;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.layout.FlowPane;
 import javafx.stage.Stage;
 
 import java.util.Observable;

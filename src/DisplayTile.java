@@ -1,6 +1,3 @@
-package sample;
-
-
 import javafx.scene.canvas.Canvas;
 
 public class DisplayTile extends Canvas {
