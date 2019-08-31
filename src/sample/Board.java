@@ -10,18 +10,15 @@ public class Board {
     public Board(int rows, int columns){
         this.rows = rows;
         this.columns = columns;
-        int numTiles = rows*columns;
         tiles = new ArrayList<Tile>();
+        fillBoard();
+    }
 
-        //fill the board with tiles
+    private void fillBoard(){
+        int numTiles = rows*columns;
         for(int i = 0; i < numTiles; i++){
-                /** I'll have to generate the elements randomly later **/
-                ArrayList<Element> elements = new ArrayList<Element>();
-                elements.add(Element.CIRCLE);
-                elements.add(Element.HLINE);
-                elements.add(Element.VLINE);
-                elements.add(Element.XCORNER);
-                tiles.add(new Tile(elements));
+            /** I'll have to generate the elements randomly later **/
+            tiles.add(new Tile());
         }
     }
 
@@ -33,7 +30,9 @@ public class Board {
         tiles.get(index).removeElement(element);
     }
 
-    public ArrayList<Tile> getTiles(){ return tiles; }
+    public ArrayList<Tile> getTiles(){
+        return tiles;
+    }
 
 
 }

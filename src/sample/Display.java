@@ -19,12 +19,15 @@ import java.util.ArrayList;
 
 public class Display{
     public static final int tileHeight = 76, tileWidth = 76;
-    private InputState inputState = new InputState();
+    private InputState inputState;
+    public FlowPane root;
+    public TilePane grid;
 
-    public Display(Stage primaryStage, int rows, int columns, Board board){
+    public Display(Stage primaryStage, int rows, int columns, Board board, InputState inputState){
+        this.inputState = inputState;
         int tiles = rows*columns;
-        FlowPane root = new FlowPane();
-        TilePane grid = fillGrid(rows, columns, board);//new TilePane();
+        root = new FlowPane();
+        grid = fillGrid(rows, columns, board);//new TilePane();
 
         VBox scoreBoard = new VBox();
         Text longestStreak = new Text("Longest Streak: 0");
@@ -41,7 +44,7 @@ public class Display{
         primaryStage.show();
     }
 
-    private TilePane fillGrid(int rows, int columns, Board board){
+    public TilePane fillGrid(int rows, int columns, Board board){
         TilePane grid = new TilePane();
         grid.setPrefColumns(columns);
         grid.setPrefRows(rows);
@@ -51,23 +54,28 @@ public class Display{
 
         for(int i = 0; i < tiles; i++){
             DisplayTile tempCanvas = paintTile(board.getTile(i).elements);
-
             tempCanvas.setIndex(i);
             tempCanvas.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent event) {
                     DisplayTile selected = (DisplayTile) event.getSource();
+                    inputState.updateState(selected.getIndex()); //this is a little sneaky this kind of sets off a cascade
                     GraphicsContext gc = selected.getGraphicsContext2D();
                     gc.setFill(Color.WHITE);
                     gc.setLineWidth(10);
                     gc.strokeRect(0,0, tileHeight, tileWidth);
-                    inputState.updateState(selected.getIndex());
+                    //ArrayList<Tile> tiles = board.getTiles();
+                    //for(Tile tile: tiles){
+                    //    paintTile(tile.elements);
+                    //}
                 }
             });
             grid.getChildren().add(tempCanvas);
         }
         return grid;
     }
+
+
 
     private DisplayTile paintTile(ArrayList<Element> elements ){
         DisplayTile newTile = new DisplayTile(tileWidth, tileHeight);
