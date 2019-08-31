@@ -25,30 +25,25 @@ public class Main extends Application implements Observer {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-
-        primaryStage.setHeight(800);
-        primaryStage.setWidth(800);
-
         this.primaryStage = primaryStage;
         board = new Board(ROWS, COLUMNS);
         score = new Score();
-        System.out.println("calling constructor to add observer");
         inputState = new InputState(this);
         display = new Display(primaryStage, ROWS, COLUMNS, board, inputState, score );
-        System.out.println("number of observers: " + inputState.countObservers());
     }
 
     @Override
     public void update(Observable o, Object arg){
-        System.out.println("we're now in update");
         Element match = compareTiles(inputState.index, inputState.oldIndex);
         if (match != null){
             board.removeTileElement(inputState.index, match);
             board.removeTileElement(inputState.oldIndex, match);
+            /** debug testing delete later
             Tile temp = board.getTile(inputState.index);
             for (Element element:temp.elements) {
                 System.out.println(element);
             }
+             */
             score.incrementStreak();
         } else {score.resetStreak();}
         updateDisplay();

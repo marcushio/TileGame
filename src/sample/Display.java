@@ -29,15 +29,12 @@ public class Display{
         int tiles = rows*columns;
         root = new FlowPane();
         grid = fillGrid(rows, columns, board);//new TilePane();
+        scoreboard = getUpdatedScoreboard(score.getCurrentStreak(), score.getLongestStreak(), board);
 
-        VBox scoreBoard = getUpdatedScoreboard(score.getCurrentStreak(), score.getLongestStreak());
-
-        //add tile board and scoreboard to canvas
         root.getChildren().add(grid);
-        root.getChildren().add(scoreBoard);
-
+        root.getChildren().add(scoreboard);
         primaryStage.setTitle("Super Pattern Matching Tile Game Wowza!");
-        primaryStage.setScene(new Scene(root, 300, 275));
+        primaryStage.setScene(new Scene(root, 600, 550));
         primaryStage.show();
     }
 
@@ -99,12 +96,18 @@ public class Display{
         return newTile;
     }
 
-    private VBox getUpdatedScoreboard(int currentStreak, int longestStreak){
+    private VBox getUpdatedScoreboard(int currentStreak, int longestStreak, Board board){
         VBox scoreBoard = new VBox();
         Text longestStreakText = new Text("Longest Streak: " + longestStreak);
         scoreBoard.getChildren().add(longestStreakText);
         Text currentStreakText = new Text("Current Streak: " + currentStreak);
         scoreBoard.getChildren().add(currentStreakText);
+        Text winText = new Text("");
+        scoreBoard.getChildren().add(winText);
+        if(board.isEmpty()){
+            winText.setText("A WINNER IS YOU!!!");
+        }
         return scoreBoard;
     }
+
 }

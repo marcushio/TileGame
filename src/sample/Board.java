@@ -30,6 +30,12 @@ public class Board {
         tiles.get(index).removeElement(element);
     }
 
+    public boolean isEmpty(){
+        for(Tile tile : tiles){
+            if(!tile.isEmpty()) return false;
+        }
+        return true;
+    }
     public ArrayList<Tile> getTiles(){
         return tiles;
     }

@@ -10,6 +10,7 @@ public class Tile {
     public static final int numElements = 4;
     public ArrayList<Element> elements;
     int index;
+    boolean isEmpty;
 
     public Tile(int index){
         this.index = index;
@@ -18,10 +19,10 @@ public class Tile {
         elements.add(Element.HLINE);
         elements.add(Element.VLINE);
         elements.add(Element.XCORNER);
+        isEmpty = false;
     }
-    public Tile(ArrayList<Element> newElements){
-        elements = new ArrayList<Element>(newElements);
-    }
+
+    public boolean isEmpty(){return isEmpty;}
 
     public int getIndex(){return index;}
 
@@ -36,5 +37,6 @@ public class Tile {
             count++;
         }
         elements.remove(index);
+        if(elements.isEmpty()) isEmpty = true;
     }
 }
