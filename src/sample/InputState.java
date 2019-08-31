@@ -6,9 +6,9 @@ import java.util.Observer;
 
 
 public class InputState extends Observable {
-   // private ArrayList<java.util.Observer> observers = new ArrayList<Observer>();
     int index;
     int oldIndex;
+    git 
     public InputState(Observer observer){
         System.out.println("adding observer in constructor");
         addObserver(observer);
