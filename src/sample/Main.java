@@ -30,7 +30,7 @@ public class Main extends Application implements Observer {
         score = new Score();
         System.out.println("calling constructor to add observer");
         inputState = new InputState(this);
-        display = new Display(primaryStage, ROWS, COLUMNS, board, inputState );
+        display = new Display(primaryStage, ROWS, COLUMNS, board, inputState, score );
         System.out.println("number of observers: " + inputState.countObservers());
     }
 
@@ -68,7 +68,7 @@ public class Main extends Application implements Observer {
     }
 
     private void updateDisplay(){
-        display = new Display(primaryStage, ROWS, COLUMNS, board, inputState);
+        display = new Display(primaryStage, ROWS, COLUMNS, board, inputState, score);
     }
 
 }

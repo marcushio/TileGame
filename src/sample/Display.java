@@ -13,7 +13,7 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import jdk.internal.util.xml.impl.Input;
+
 
 import java.util.ArrayList;
 
@@ -22,24 +22,21 @@ public class Display{
     private InputState inputState;
     public FlowPane root;
     public TilePane grid;
+    private VBox scoreboard;
 
-    public Display(Stage primaryStage, int rows, int columns, Board board, InputState inputState){
+    public Display(Stage primaryStage, int rows, int columns, Board board, InputState inputState, Score score){
         this.inputState = inputState;
         int tiles = rows*columns;
         root = new FlowPane();
         grid = fillGrid(rows, columns, board);//new TilePane();
 
-        VBox scoreBoard = new VBox();
-        Text longestStreak = new Text("Longest Streak: 0");
-        scoreBoard.getChildren().add(longestStreak);
-        Text currentStreak = new Text("Current Streak: 0");
-        scoreBoard.getChildren().add(currentStreak);
+        VBox scoreBoard = getUpdatedScoreboard(score.getCurrentStreak(), score.getLongestStreak());
 
         //add tile board and scoreboard to canvas
         root.getChildren().add(grid);
         root.getChildren().add(scoreBoard);
 
-        primaryStage.setTitle("Pattern Match");
+        primaryStage.setTitle("Super Pattern Matching Tile Game Wowza!");
         primaryStage.setScene(new Scene(root, 300, 275));
         primaryStage.show();
     }
@@ -68,7 +65,6 @@ public class Display{
     }
 
     private DisplayTile paintTile(Tile tile){
-        System.out.println("tile index: " + tile.getIndex() + "inputState index is " +  inputState.index);
         ArrayList<Element> elements = tile.elements;
         DisplayTile newTile = new DisplayTile(tileWidth, tileHeight);
         GraphicsContext gc = newTile.getGraphicsContext2D();
@@ -101,5 +97,14 @@ public class Display{
         }
 
         return newTile;
+    }
+
+    private VBox getUpdatedScoreboard(int currentStreak, int longestStreak){
+        VBox scoreBoard = new VBox();
+        Text longestStreakText = new Text("Longest Streak: " + longestStreak);
+        scoreBoard.getChildren().add(longestStreakText);
+        Text currentStreakText = new Text("Current Streak: " + currentStreak);
+        scoreBoard.getChildren().add(currentStreakText);
+        return scoreBoard;
     }
 }
