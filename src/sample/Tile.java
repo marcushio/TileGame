@@ -1,6 +1,7 @@
 package sample;
 import java.util.ArrayList;
 enum Element{
+    //XCORNER is an x in the corner, VLINE is a vertical line, and HLine is a horizontal line
     SQUARE, CIRCLE, XCORNER, HLINE, VLINE;
 }
 

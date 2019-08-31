@@ -75,8 +75,6 @@ public class Display{
         return grid;
     }
 
-
-
     private DisplayTile paintTile(ArrayList<Element> elements ){
         DisplayTile newTile = new DisplayTile(tileWidth, tileHeight);
         GraphicsContext gc = newTile.getGraphicsContext2D();

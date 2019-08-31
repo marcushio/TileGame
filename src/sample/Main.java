@@ -17,6 +17,7 @@ public class Main extends Application implements Observer {
     private Board board;
     private Score score;
     private Display display;
+    private Stage primaryStage;
 
     public static void main(String[] args) {
         launch(args);
@@ -24,8 +25,9 @@ public class Main extends Application implements Observer {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
+        this.primaryStage = primaryStage;
         board = new Board(ROWS, COLUMNS);
-        score = new Score(); 
+        score = new Score();
         System.out.println("calling constructor to add observer");
         inputState = new InputState(this);
         display = new Display(primaryStage, ROWS, COLUMNS, board, inputState );
@@ -34,18 +36,22 @@ public class Main extends Application implements Observer {
 
     @Override
     public void update(Observable o, Object arg){
-        System.out.println("time to update");
+        System.out.println("we're now in update");
         Element match = compareTiles(inputState.index, inputState.oldIndex);
         if (match != null){
             board.removeTileElement(inputState.index, match);
             board.removeTileElement(inputState.oldIndex, match);
+            Tile temp = board.getTile(inputState.index);
+            for (Element element:temp.elements) {
+                System.out.println(element);
+            }
             score.updateStreak();
             updateDisplay();
         }
     }
 
     public Element compareTiles(int index, int oldIndex){
-        System.out.println("time to compare tiles");
+        System.out.println("we're now in compareTiles");
         Tile selection1 = board.getTile(index);
         Tile selection2 = board.getTile(oldIndex);
         for(Element element1: selection1.elements){
@@ -60,7 +66,7 @@ public class Main extends Application implements Observer {
     }
 
     private void updateDisplay(){
-        display.grid = display.fillGrid(ROWS, COLUMNS, board);
+        display = new Display(primaryStage, ROWS, COLUMNS, board, inputState);
     }
 
 }
