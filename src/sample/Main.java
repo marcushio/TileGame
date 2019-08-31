@@ -46,19 +46,21 @@ public class Main extends Application implements Observer {
                 System.out.println(element);
             }
             score.updateStreak();
-            updateDisplay();
         }
+        updateDisplay();
     }
 
     public Element compareTiles(int index, int oldIndex){
         System.out.println("we're now in compareTiles");
-        Tile selection1 = board.getTile(index);
-        Tile selection2 = board.getTile(oldIndex);
-        for(Element element1: selection1.elements){
-            for(Element element2: selection2.elements){
-                if(element1 == element2){
-                    System.out.println("match for selection1: " + element1 + " selection2: "+ element2);
-                    return element1;
+        if(index >= 0 && oldIndex >=0) {
+            Tile selection1 = board.getTile(index);
+            Tile selection2 = board.getTile(oldIndex);
+            for (Element element1 : selection1.elements) {
+                for (Element element2 : selection2.elements) {
+                    if (element1 == element2) {
+                        System.out.println("match for selection1: " + element1 + " selection2: " + element2);
+                        return element1;
+                    }
                 }
             }
         }

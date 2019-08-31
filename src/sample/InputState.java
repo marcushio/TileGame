@@ -6,9 +6,10 @@ import java.util.Observer;
 
 
 public class InputState extends Observable {
-    int index;
-    int oldIndex;
-    git 
+    //start at -1 so I don't highlight anything on the board to start
+    int index = -1;
+    int oldIndex = -1;
+
     public InputState(Observer observer){
         System.out.println("adding observer in constructor");
         addObserver(observer);

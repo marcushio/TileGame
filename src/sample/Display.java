@@ -68,6 +68,7 @@ public class Display{
     }
 
     private DisplayTile paintTile(Tile tile){
+        System.out.println("tile index: " + tile.getIndex() + "inputState index is " +  inputState.index);
         ArrayList<Element> elements = tile.elements;
         DisplayTile newTile = new DisplayTile(tileWidth, tileHeight);
         GraphicsContext gc = newTile.getGraphicsContext2D();
