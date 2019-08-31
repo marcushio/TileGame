@@ -4,18 +4,16 @@ public class Score {
     private int longestStreak = 0;
     private int currentStreak = 0;
 
-    public void updateStreak(){
+    public void incrementStreak(){
         currentStreak++;
         if (currentStreak >= longestStreak){
             longestStreak = currentStreak;
         }
     }
 
-    public int getCurrentStreak() {
-        return currentStreak;
-    }
+    public void resetStreak() { currentStreak = 0; }
 
-    public int getLongestStreak() {
-        return longestStreak;
-    }
+    public int getCurrentStreak() { return currentStreak; }
+
+    public int getLongestStreak() { return longestStreak; }
 }

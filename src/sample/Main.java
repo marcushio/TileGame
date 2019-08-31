@@ -25,6 +25,10 @@ public class Main extends Application implements Observer {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
+
+        primaryStage.setHeight(800);
+        primaryStage.setWidth(800);
+
         this.primaryStage = primaryStage;
         board = new Board(ROWS, COLUMNS);
         score = new Score();
@@ -45,8 +49,8 @@ public class Main extends Application implements Observer {
             for (Element element:temp.elements) {
                 System.out.println(element);
             }
-            score.updateStreak();
-        }
+            score.incrementStreak();
+        } else {score.resetStreak();}
         updateDisplay();
     }
 
